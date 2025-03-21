@@ -28,19 +28,10 @@ To use this module, add it to the modules array in the `config/config.js` file:
 
 ```js
     {
-        module: 'MMM-PinterestMosaic',
-        position: 'lower_third'
-    },
-```
-
-Or you could use all the options:
-
-```js
-    {
-        module: 'MMM-PinterestMosaic',
-        position: 'lower_third',
+        module: "MMM-PinterestMosaic",
+        position: "top_left", // Position on the screen (adjust as needed)
         config: {
-            exampleContent: 'Welcome world'
+        pinterestBoardURL: "https://pinterest.com/",
         }
     },
 ```
@@ -49,7 +40,7 @@ Or you could use all the options:
 
 Option|Possible values|Default|Description
 ------|------|------|-----------
-`exampleContent`|`string`|not available|The content to show on the page
+`pinterestBoardURL`|`string`|not available|The link to the pinterest board you want to display
 
 ## Sending notifications to the module
 

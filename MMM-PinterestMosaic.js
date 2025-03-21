@@ -14,7 +14,7 @@ Module.register("MMM-PinterestMosaic", {
    * Pseudo-constructor for our module. Initialize stuff here.
    */
   start() {
-    this.imageURLs = []; // Initialize the imageURLs array to store the URLs
+    this.imageURLs = [] // Initialize the imageURLs array to store the URLs
 
     // Check if pinterestBoardURL is provided in the config
     if (this.config.pinterestBoardURL) {
@@ -36,7 +36,7 @@ Module.register("MMM-PinterestMosaic", {
       "https://via.placeholder.com/200x200?text=Image3",
       "https://via.placeholder.com/200x200?text=Image4",
       // Add more image URLs here
-    ];
+    ]
 
     console.log("Pinterest images loaded from board:", this.config.pinterestBoardURL)
 
@@ -72,7 +72,7 @@ Module.register("MMM-PinterestMosaic", {
       img.src = url
       img.classList.add("mosaic-image")
       mosaicWrapper.appendChild(img)
-    });
+    })
 
     wrapper.appendChild(mosaicWrapper) // Append the mosaic grid to the wrapper
 
