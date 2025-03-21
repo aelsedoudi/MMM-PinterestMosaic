@@ -1,6 +1,6 @@
 Module.register("MMM-PinterestMosaic", {
   defaults: {
-    pinterestBoardURL: "", // Default is empty, to be provided by config.js
+    pinterestBoardURL: "", // Pinterest board URL to be passed from config
   },
 
   /**
@@ -25,22 +25,10 @@ Module.register("MMM-PinterestMosaic", {
   },
 
   /**
-   * Fetch Pinterest images.
-   * In this example, it's hardcoded; you can replace this with actual API fetching logic.
+   * Request Pinterest images from the node helper.
    */
   loadPinterestImages() {
-    // Simulating fetching Pinterest images (replace with real Pinterest API or scraping logic)
-    this.imageURLs = [
-      "https://via.placeholder.com/200x200?text=Image1",
-      "https://via.placeholder.com/200x200?text=Image2",
-      "https://via.placeholder.com/200x200?text=Image3",
-      "https://via.placeholder.com/200x200?text=Image4",
-      // Add more image URLs here
-    ]
-
-    console.log("Pinterest images loaded from board:", this.config.pinterestBoardURL)
-
-    this.updateDom() // Update the DOM once the images are fetched
+    this.sendSocketNotification("FETCH_PINTEREST_IMAGES", { pinterestBoardURL: this.config.pinterestBoardURL })
   },
 
   /**
@@ -51,9 +39,9 @@ Module.register("MMM-PinterestMosaic", {
    * @param {any} payload - The payload data returned by the node helper.
    */
   socketNotificationReceived: function (notification, payload) {
-    if (notification === "EXAMPLE_NOTIFICATION") {
-      this.templateContent = `${this.config.exampleContent} ${payload.text}`
-      this.updateDom()
+    if (notification === "PINTEREST_IMAGES") {
+      this.imageURLs = payload // Store the scraped image URLs
+      this.updateDom() // Update the DOM once the images are fetched
     }
   },
 
