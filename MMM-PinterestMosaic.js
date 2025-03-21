@@ -38,10 +38,11 @@ Module.register("MMM-PinterestMosaic", {
    * @param {string} notification - The notification identifier.
    * @param {any} payload - The payload data returned by the node helper.
    */
-  socketNotificationReceived: function (notification, payload) {
+  socketNotificationReceived(notification, payload) {
     if (notification === "PINTEREST_IMAGES") {
-      this.imageURLs = payload // Store the scraped image URLs
-      this.updateDom() // Update the DOM once the images are fetched
+      console.log("Received Pinterest images:", payload) // Log the received images
+      this.images = payload // Store the images in the module's state
+      this.updateDom()
     }
   },
 
@@ -50,21 +51,28 @@ Module.register("MMM-PinterestMosaic", {
    */
   getDom() {
     const wrapper = document.createElement("div")
+    if (this.images && this.images.length > 0) {
+      // Create a container for the image mosaic
+      const mosaicContainer = document.createElement("div")
+      mosaicContainer.style.display = "grid"
+      mosaicContainer.style.gridTemplateColumns = "repeat(auto-fill, minmax(100px, 1fr))"
+      mosaicContainer.style.gap = "5px"
 
-    // Create a grid of images using the URLs fetched
-    const mosaicWrapper = document.createElement("div")
-    mosaicWrapper.classList.add("pinterest-mosaic")
+      // Loop through the images and create image elements
+      this.images.forEach((imageUrl) => {
+        const img = document.createElement("img")
+        img.src = imageUrl
+        img.style.width = "100%" // Make the image fill its container
+        img.style.height = "auto"
+        mosaicContainer.appendChild(img)
+      })
 
-    this.imageURLs.forEach((url) => {
-      const img = document.createElement("img")
-      img.src = url
-      img.classList.add("mosaic-image")
-      mosaicWrapper.appendChild(img)
-    })
+      wrapper.appendChild(mosaicContainer)
+    } else {
+      wrapper.innerHTML = "<p>No images found.</p>"
+    }
 
-    wrapper.appendChild(mosaicWrapper) // Append the mosaic grid to the wrapper
-
-    return wrapper // Return the DOM structure
+    return wrapper
   },
 
   /**

@@ -17,15 +17,19 @@ module.exports = NodeHelper.create({
         const $ = cheerio.load(response.data) // Load the HTML content with Cheerio
         const imageUrls = []
 
-        // Look for image elements with Pinterest's typical structure
         $("img[src]").each((i, element) => {
           const imageUrl = $(element).attr("src")
 
-          // We only want to add the larger image URLs (Pinterest stores them in various sizes)
+          // Log each image URL
+          console.log(`Found image URL: ${imageUrl}`)
+
           if (imageUrl && imageUrl.includes("236x")) { // Filter for larger image URLs
             imageUrls.push(imageUrl)
           }
         })
+
+        // Log the list of image URLs scraped
+        console.log("Scraped images:", imageUrls)
 
         // Send the list of image URLs back to the frontend module
         this.sendSocketNotification("PINTEREST_IMAGES", imageUrls)
