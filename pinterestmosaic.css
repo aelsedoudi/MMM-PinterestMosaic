@@ -1,3 +1,14 @@
-.MMM-Template div {
-    color: purple;
-}
+.pinterest-mosaic {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Automatically adjusts columns */
+    gap: 10px; /* Adds spacing between images */
+    padding: 10px; /* Adds padding around the grid */
+  }
+  
+  .mosaic-image {
+    width: 100%; /* Makes images fill the available space */
+    height: auto; /* Keeps the aspect ratio intact */
+    object-fit: cover; /* Ensures images cover the grid cell without distortion */
+    border-radius: 8px; /* Optional: rounded corners for images */
+  }
+  
