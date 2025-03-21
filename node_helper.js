@@ -17,14 +17,20 @@ module.exports = NodeHelper.create({
         const $ = cheerio.load(response.data) // Load the HTML content with Cheerio
         const imageUrls = []
 
-        $("img[src]").each((i, element) => {
-          const imageUrl = $(element).attr("src")
+        // Loop through all <img> tags to find valid image URLs
+        $("img").each((i, element) => {
+          // Get the srcset attribute (which contains multiple image sizes)
+          const srcset = $(element).attr("srcset")
 
-          // Log each image URL
-          console.log(`Found image URL: ${imageUrl}`)
+          if (srcset) {
+            // Extract the largest image from the srcset (the highest resolution)
+            const srcsetUrls = srcset.split(", ") // Split into multiple sizes
+            const largestUrl = srcsetUrls[srcsetUrls.length - 1].split(" ")[0] // Get the last (largest) URL
 
-          if (imageUrl && imageUrl.includes("236x")) { // Filter for larger image URLs
-            imageUrls.push(imageUrl)
+            // Check if it's a valid image URL and not a profile or small image
+            if (largestUrl && largestUrl.includes("originals")) {
+              imageUrls.push(largestUrl) // Add the highest res URL to the array
+            }
           }
         })
 
