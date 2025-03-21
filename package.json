@@ -1,8 +1,8 @@
 {
-  "name": "mmm-template",
+  "name": "mmm-pinterestmosaic",
   "version": "1.0.0",
-  "description": "[Module description]",
-  "main": "MMM-Template.js",
+  "description": "A MagicMirror module that pulls a specific board's photos and displays them as a mosaic",
+  "main": "MMM-PinterestMosaic.js",
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -10,17 +10,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+[GitHub url].git"
+    "url": "git+https://github.com/aelsedoudi/MMM-PinterestMosaic.git"
   },
   "keywords": [
     "template"
   ],
-  "author": "[Author]",
+  "author": "Adam Elsedoudi",
   "license": "MIT",
   "bugs": {
-    "url": "[GitHub url]/issues"
+    "url": "https://github.com/aelsedoudi/MMM-PinterestMosaic/issues"
   },
-  "homepage": "[GitHub url]#readme",
+  "homepage": "https://github.com/aelsedoudi/MMM-PinterestMosaic#readme",
   "devDependencies": {
     "@eslint/js": "^9.10.0",
     "@stylistic/eslint-plugin": "^2.7.2",
